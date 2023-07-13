@@ -52,17 +52,17 @@ client.on("message", async (message) => {
   const isGroups = message.from.endsWith("@g.us") ? true : false;
   if (!isGroups) {
     if (
-      !`${config.prefix}sticker` ||
-      `${config.prefix}image` ||
-      `${config.prefix}gpt` ||
+      message.body != `${config.prefix}sticker` &&
+      `${config.prefix}image` &&
+      `${config.prefix}gpt` &&
       `${config.prefix}dalle`
     ) {
-      if (message.body) {
-        client.sendMessage(
-          message.from,
-          `halooo welkam to bot ibu peri\n\ngunakan beberapa command dibawah ini untuk menggunakannya\n\n!sticker = merubah gambar menjadi Sticker\n!image = merubah sticker menjadi gambar\n!change "nama" | "author" = merubah deskripsi sticker\n\n\ndisini kalian juga bisa menyakan sesuatu ke ChatGPT secara langsung loh dengan cara dibawah ini\n\n!gpt "pertanyaan" = menanyakan hal ke ChatGPT\n!dalle "gambar random" = membuat gambar random yang di generate oleh OpenAI\n\nKalian juga bisa menambahkan bot ini group juga loh, cobain yukk`
-        );
-      }
+      client.sendMessage(
+        message.from,
+        `halooo welkam to bot ibu peri\n\ngunakan beberapa command dibawah ini untuk menggunakannya\n\n!sticker = merubah gambar menjadi Sticker\n!image = merubah sticker menjadi gambar\n!change "nama" | "author" = merubah deskripsi sticker\n\n\ndisini kalian juga bisa menyakan sesuatu ke ChatGPT secara langsung loh dengan cara dibawah ini\n\n!gpt "pertanyaan" = menanyakan hal ke ChatGPT\n!dalle "gambar random" = membuat gambar random yang di generate oleh OpenAI\n\nKalian juga bisa menambahkan bot ini group juga loh, cobain yukk`
+      );
+    } else {
+      client.sendMessage(message.from, "Permintaan anda di proses");
     }
   }
 
