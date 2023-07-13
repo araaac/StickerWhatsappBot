@@ -33,16 +33,14 @@ client.on("ready", () => {
           .format("HH:mm:ss")}] Console Text not found!`.yellow
       );
       console.log(
-        `[${moment().tz(config.timezone).format("HH:mm:ss")}] ${
-          config.name
-        } is Already!`.green
+        `[${moment().tz(config.timezone).format("HH:mm:ss")}] ${config.name
+          } is Already!`.green
       );
     } else {
       console.log(data.green);
       console.log(
-        `[${moment().tz(config.timezone).format("HH:mm:ss")}] ${
-          config.name
-        } is Already!`.green
+        `[${moment().tz(config.timezone).format("HH:mm:ss")}] ${config.name
+          } is Already!`.green
       );
     }
   });
@@ -51,18 +49,27 @@ client.on("ready", () => {
 client.on("message", async (message) => {
   const isGroups = message.from.endsWith("@g.us") ? true : false;
   if (!isGroups) {
-    if (
-      message.body != `${config.prefix}sticker` &&
-      `${config.prefix}image` &&
-      `${config.prefix}gpt` &&
-      `${config.prefix}dalle`
-    ) {
+    if(message.body == `${config.prefix}sticker`){
+      console.log('sticker')
+    } else if (message.body == `${config.prefix}image`){
+      console.log('image')
+    } else if (message.body == `${config.prefix}change`){
+      console.log('change')
+    } else if (message.body == `${config.prefix}gpt`){
+      client.sendMessage(
+        message.from,
+        `Perintah ChatGPT anda akan segera di proses`
+      );
+    } else if (message.body == `${config.prefix}dalle`){
+      client.sendMessage(
+        message.from,
+        `Perintah Dall-E anda akan segera di proses`
+      );
+    }else {
       client.sendMessage(
         message.from,
         `halooo welkam to bot ibu peri\n\ngunakan beberapa command dibawah ini untuk menggunakannya\n\n!sticker = merubah gambar menjadi Sticker\n!image = merubah sticker menjadi gambar\n!change "nama" | "author" = merubah deskripsi sticker\n\n\ndisini kalian juga bisa menyakan sesuatu ke ChatGPT secara langsung loh dengan cara dibawah ini\n\n!gpt "pertanyaan" = menanyakan hal ke ChatGPT\n!dalle "gambar random" = membuat gambar random yang di generate oleh OpenAI\n\nKalian juga bisa menambahkan bot ini group juga loh, cobain yukk`
       );
-    } else {
-      client.sendMessage(message.from, "Permintaan anda di proses");
     }
   }
 
