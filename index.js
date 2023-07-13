@@ -48,52 +48,29 @@ client.on("ready", () => {
 
 client.on("message", async (message) => {
   const isGroups = message.from.endsWith("@g.us") ? true : false;
-  if (!isGroups) {
-    if(message.body == `${config.prefix}sticker`){
-      console.log('sticker')
-    } else if (message.body == `${config.prefix}image`){
-      console.log('image')
-    } else if (message.body == `${config.prefix}change`){
-      console.log('change')
-    } else if (message.body == `${config.prefix}gpt`){
-      client.sendMessage(
-        message.from,
-        `Perintah ChatGPT anda akan segera di proses`
-      );
-    } else if (message.body == `${config.prefix}dalle`){
-      client.sendMessage(
-        message.from,
-        `Perintah Dall-E anda akan segera di proses`
-      );
-    }else {
+  if ((isGroups && config.groups) || !isGroups) {
+
+    // if (message.body == `${config.prefix}gpt`) {
+    //   const quotedMsg = await message.getQuotedMessage();
+    //   if (message.hasQuotedMsg && quotedMsg.hasMedia) {
+    //     client.sendMessage(message.from, "Perintah Dall-E anda akan segera di proses");
+    //   }
+    // };
+
+    // if (message.body == `${config.prefix}gpt`) {
+    //   const quotedMsg = await message.getQuotedMessage();
+    //   if (message.hasQuotedMsg && quotedMsg.hasMedia) {
+    //     client.sendMessage(message.from, "Perintah ChatGPT anda akan segera di proses");
+    //   }
+
+    //   // Sticker to Image (Auto)
+    // }
+    if(message.body == `${config.prefix}help`){
       client.sendMessage(
         message.from,
         `halooo welkam to bot ibu peri\n\ngunakan beberapa command dibawah ini untuk menggunakannya\n\n!sticker = merubah gambar menjadi Sticker\n!image = merubah sticker menjadi gambar\n!change "nama" | "author" = merubah deskripsi sticker\n\n\ndisini kalian juga bisa menyakan sesuatu ke ChatGPT secara langsung loh dengan cara dibawah ini\n\n!gpt "pertanyaan" = menanyakan hal ke ChatGPT\n!dalle "gambar random" = membuat gambar random yang di generate oleh OpenAI\n\nKalian juga bisa menambahkan bot ini group juga loh, cobain yukk`
       );
     }
-  }
-
-  if ((isGroups && config.groups) || !isGroups) {
-    // Send Message
-
-    // Image to Sticker (Auto && Caption)
-    // if ((message.type == "image" || message.type == "video" || message.type  == "gif") || (message._data.caption == `${config.prefix}sticker`)) {
-    //     client.sendMessage(message.from, "*[⏳]* Loading..");
-    //     try {
-    //         const media = await message.downloadMedia();
-    //         client.sendMessage(message.from, media, {
-    //             sendMediaAsSticker: true,
-    //             stickerName: config.name, // Sticker Name = Edit in 'config/config.json'
-    //             stickerAuthor: config.author // Sticker Author = Edit in 'config/config.json'
-    //         }).then(() => {
-    //             client.sendMessage(message.from, "*[✅]* Successfully!");
-    //         });
-    //     } catch {
-    //         client.sendMessage(message.from, "*[❎]* Failed!");
-    //     }
-
-    // // Image to Sticker (With Reply Image)
-    // }
     if (message.body == `${config.prefix}sticker`) {
       const quotedMsg = await message.getQuotedMessage();
       if (message.hasQuotedMsg && quotedMsg.hasMedia) {
